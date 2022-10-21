@@ -1,7 +1,7 @@
 clearAndDraw(Shape s) {
 // logging cleaning validation
-  print('\n\n\n\n\n\n\n\n\n\n');
   s._draw();
+  print('\n\n\n\n\n\n\n\n\n\n');
 // cleaning
 }
 
@@ -10,7 +10,7 @@ void main() {
   clearAndDraw(c);
   Rect r = Rect();
   clearAndDraw(r);
-  Arc a = Arc();
+  Triangle a = Triangle();
   clearAndDraw(a);
 }
 
@@ -32,7 +32,7 @@ class Rect extends Shape {
   }
 }
 
-class Arc extends Shape {
+class Triangle extends Shape {
   @override
   void _draw() {
     print('\t*\n\t**');
