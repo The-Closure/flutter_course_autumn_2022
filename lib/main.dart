@@ -1,5 +1,4 @@
-import 'package:continer/first_page.dart';
-import 'package:continer/second_page.dart';
+import 'package:flutter_course_autumn_2022/second_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
