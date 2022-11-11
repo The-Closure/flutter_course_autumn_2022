@@ -11,6 +11,11 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: 'search',
+        child: Icon(
+          Icons.search,
+          size: 20,
+        ),
         onPressed: () {
           Navigator.of(context).pushNamed('/second_page');
         },

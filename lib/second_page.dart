@@ -15,10 +15,22 @@ class SecondPage extends StatelessWidget {
         },
       ),
       body: Center(
-        child: Container(
-          height: 500,
-          width: 500,
-          color: Colors.amber,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Hero(
+              tag: 'search',
+              child: Icon(
+                Icons.search,
+                size: 80,
+              ),
+            ),
+            Container(
+              height: 500,
+              width: 500,
+              color: Colors.amber,
+            ),
+          ],
         ),
       ),
     );
