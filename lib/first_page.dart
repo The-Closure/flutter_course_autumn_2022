@@ -7,6 +7,18 @@ class FirstPage extends StatelessWidget {
   FirstPage({Key? key}) : super(key: key);
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final phoneContoller = TextEditingController();
+
+  void onSubmit() {
+    bool status = formKey.currentState?.validate() ?? false;
+    if (status) {
+      print('continue progress');
+    } else {
+      print('has error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +58,17 @@ class FirstPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: TextFormField(
+                validator: (value) {
+                  value = '$value@gmail.com';
+                  final emailRegex = RegExp(
+                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+                  final status = emailRegex.hasMatch(value ?? '');
+                  if (status) {
+                    return null;
+                  } else {
+                    return 'please check your email address';
+                  }
+                },
                 controller: emailController,
                 decoration: InputDecoration(
                   label: Text(
@@ -77,8 +100,18 @@ class FirstPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(24),
               child: TextFormField(
+                validator: ((value) {
+                  final phoneRegex =
+                      RegExp(r"^[(]?[0-9]{3}[)]?[0-9]{3}[0-9]{4,5}$");
+                  final status = phoneRegex.hasMatch(value ?? '');
+                  if (status) {
+                    return null;
+                  } else {
+                    return 'please check your phone number';
+                  }
+                }),
                 keyboardType: TextInputType.number,
-                // controller: emailController,
+                controller: phoneContoller,
                 decoration: InputDecoration(
                   label: Text(
                     'phone',
@@ -106,9 +139,19 @@ class FirstPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: TextFormField(
+                validator: ((value) {
+                  final passwordRegex = RegExp(
+                      r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+                  final status = passwordRegex.hasMatch(value ?? '');
+                  if (status) {
+                    return null;
+                  } else {
+                    return 'please check your password';
+                  }
+                }),
                 keyboardType: TextInputType.text,
                 obscureText: true,
-                // controller: emailController,
+                controller: passwordController,
                 decoration: InputDecoration(
                   label: Text(
                     'password',
@@ -136,6 +179,12 @@ class FirstPage extends StatelessWidget {
                   hintText: 'P@ssw0rd',
                 ),
                 cursorColor: Colors.green,
+              ),
+            ),
+            OutlinedButton(
+              onPressed: onSubmit,
+              child: Text(
+                'submit',
               ),
             ),
           ],
