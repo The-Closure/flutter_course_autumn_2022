@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_autumn_2022/second_page.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -25,7 +26,11 @@ class FirstPage extends StatelessWidget {
                 child: CircleAvatar(child: Icon(Icons.person)),
                 onTap: () {
                   // Navigator.of(context).pop();
-                  print('image clicked');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctxt) => SecondPage(),
+                    ),
+                  );
                 },
               ),
               title: Row(
@@ -55,7 +60,7 @@ class FirstPage extends StatelessWidget {
                 );
               },
             ),
-            ImageViewer()
+            ImageViewer(),
           ],
         ),
       ),
