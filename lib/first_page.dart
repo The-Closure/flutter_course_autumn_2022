@@ -5,7 +5,70 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: CustomDateTimePicker()),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              CustomDateTimePicker(),
+              CustomRadioList()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomRadioList extends StatefulWidget {
+  CustomRadioList({Key? key}) : super(key: key);
+
+  @override
+  State<CustomRadioList> createState() => _CustomRadioListState();
+}
+
+class _CustomRadioListState extends State<CustomRadioList> {
+  String _groupValue = 'tea';
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Radio(
+            value: 'tea',
+            groupValue: _groupValue,
+            onChanged: (value) {
+              setState(() {
+                _groupValue = value ?? '';
+              });
+            },
+          ),
+          title: Text('tea'),
+        ),
+        ListTile(
+          leading: Radio(
+            value: 'coffee',
+            groupValue: _groupValue,
+            onChanged: (value) {
+              setState(() {
+                _groupValue = value ?? '';
+              });
+            },
+          ),
+          title: Text('coffee'),
+        ),
+        ListTile(
+          leading: Radio(
+            value: 'aya_shee',
+            groupValue: _groupValue,
+            onChanged: (value) {
+              setState(() {
+                _groupValue = value ?? '';
+              });
+            },
+          ),
+          title: Text('aya shee'),
+        ),
+      ],
     );
   }
 }
@@ -45,7 +108,7 @@ class _CustomDatePickerState extends State<CustomDateTimePicker> {
                 pickedDateStr =
                     '${pickedDate?.year ?? ' '}-${pickedDate?.month ?? ' '}-${pickedDate?.day ?? ' '}';
               });
-               TimeOfDay? time = await showTimePicker(
+              TimeOfDay? time = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
               setState(() {
                 pickedTimeStr = '${time?.hour ?? ' '}:${time?.minute ?? ' '}';
