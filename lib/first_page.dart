@@ -1,140 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_autumn_2022/custom_generator.dart';
+import 'package:flutter_course_autumn_2022/main.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   FirstPage({Key? key}) : super(key: key);
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  Stream<DateTime> realTime = CustomGenerator().generateRealTimeDate();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              CustomDateTimePicker(),
-              CustomRadioList()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomRadioList extends StatefulWidget {
-  CustomRadioList({Key? key}) : super(key: key);
-
-  @override
-  State<CustomRadioList> createState() => _CustomRadioListState();
-}
-
-class _CustomRadioListState extends State<CustomRadioList> {
-  String _groupValue = 'tea';
-  @override
-  Widget build(BuildContext context) {
-    return Column(
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        ListTile(
-          leading: Radio(
-            value: 'tea',
-            groupValue: _groupValue,
-            onChanged: (value) {
-              setState(() {
-                _groupValue = value ?? '';
-              });
+        Container(
+          child: FutureBuilder<int>(
+              future: CustomGenerator().calculateDate(
+                90,
+              ),
+              builder: (ctxt, snapshot) {
+                if (snapshot.hasData) {
+                  return Center(
+                    child: Text('took ${snapshot.data} to find 90000'),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('error occured'),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+        ),
+        Container(
+          child: StreamBuilder<DateTime>(
+            stream: realTime,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<DateTime> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.connectionState == ConnectionState.active ||
+                  snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  
+                  return Text(snapshot.data.toString(),
+                      style: const TextStyle(color: Colors.red, fontSize: 40));
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
             },
           ),
-          title: Text('tea'),
-        ),
-        ListTile(
-          leading: Radio(
-            value: 'coffee',
-            groupValue: _groupValue,
-            onChanged: (value) {
-              setState(() {
-                _groupValue = value ?? '';
-              });
-            },
-          ),
-          title: Text('coffee'),
-        ),
-        ListTile(
-          leading: Radio(
-            value: 'aya_shee',
-            groupValue: _groupValue,
-            onChanged: (value) {
-              setState(() {
-                _groupValue = value ?? '';
-              });
-            },
-          ),
-          title: Text('aya shee'),
-        ),
+        )
       ],
-    );
-  }
-}
-
-class CustomDateTimePicker extends StatefulWidget {
-  CustomDateTimePicker({
-    super.key,
-  });
-
-  @override
-  State<CustomDateTimePicker> createState() => _CustomDatePickerState();
-}
-
-class _CustomDatePickerState extends State<CustomDateTimePicker> {
-  String pickedDateStr = ' - - ';
-  String pickedTimeStr = ' : ';
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        ListTile(
-          leading: IconButton(
-            color: Colors.blue,
-            iconSize: 40,
-            icon: Icon(Icons.date_range),
-            onPressed: () async {
-              DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(), //get today's date
-                  firstDate: DateTime(
-                      2000), //DateTime.now() - not to allow to choose before today.
-                  lastDate: DateTime(2101));
-              setState(() {
-                pickedDateStr =
-                    '${pickedDate?.year ?? ' '}-${pickedDate?.month ?? ' '}-${pickedDate?.day ?? ' '}';
-              });
-              TimeOfDay? time = await showTimePicker(
-                  context: context, initialTime: TimeOfDay.now());
-              setState(() {
-                pickedTimeStr = '${time?.hour ?? ' '}:${time?.minute ?? ' '}';
-              });
-            },
-          ),
-          title: Text('$pickedDateStr'),
-        ),
-        ListTile(
-          title: Text('$pickedTimeStr'),
-          leading: IconButton(
-            icon: Icon(
-              Icons.watch_later,
-              color: Colors.blue,
-            ),
-            iconSize: 40,
-            onPressed: () async {
-              TimeOfDay? time = await showTimePicker(
-                  context: context, initialTime: TimeOfDay.now());
-              setState(() {
-                pickedTimeStr = '${time?.hour ?? ' '}:${time?.minute ?? ' '}';
-              });
-            },
-          ),
-        ),
-      ],
-    );
+    ));
   }
 }
