@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_autumn_2022/first_page.dart';
+import 'package:flutter_course_autumn_2022/second_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          headline1: TextStyle(color: Colors.amber, fontSize: 22),
+        ),
+      ),
+      home: SecondPage(),
     );
   }
 }
