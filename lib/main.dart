@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course_autumn_2022/first_page.dart';
+import 'package:flutter_course_autumn_2022/second_page.dart';
+import 'package:flutter_course_autumn_2022/third_page.dart';
 
-void main() {
-  runApp(const MyApp());
+main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      debugShowCheckedModeBanner: false,
+      home: ThirdPage(),
     );
   }
 }
+//first page card
+//secondPage chips,slider
+//third page checkBox,Dialog
