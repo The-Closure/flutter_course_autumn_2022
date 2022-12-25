@@ -19,5 +19,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailed(e.toString().substring(e.toString().indexOf(':') + 1)));
       }
     });
+    on<LogoutEvent>(
+      (event, emit) async {
+        emit(AuthLoading());
+        await ls.delete('TOKEN');
+        await Future.delayed(Duration(seconds: 2));
+        emit(AuthOutState());
+      },
+    );
   }
 }

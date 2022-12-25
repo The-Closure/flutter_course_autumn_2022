@@ -6,6 +6,10 @@ saveToken(String value) {
 }
 
 Future<String?> read(String key) {
-  return SharedPreferences.getInstance()
-      .then((pref) => pref.getString(key));
+  return SharedPreferences.getInstance().then((pref) => pref.getString(key));
+}
+
+Future<void> delete(String key) async {
+  await SharedPreferences.getInstance().then((pref) => pref.remove(key));
+  return;
 }

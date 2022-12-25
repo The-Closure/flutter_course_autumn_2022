@@ -8,3 +8,5 @@ class SigninEvent extends AuthEvent {
   final String password;
   SigninEvent({required this.username, required this.password});
 }
+
+class LogoutEvent extends AuthEvent {}

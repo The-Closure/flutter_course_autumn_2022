@@ -12,17 +12,16 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          if(BaseSignIn.of(context)?.formKey.currentState?.validate() ?? false){
-
-          BlocProvider.of<AuthBloc>(context).add(
-            SigninEvent(
-              username: BaseSignIn.of(context)?.usernameController.text ?? '',
-              password: BaseSignIn.of(context)?.passwordController.text ?? '',
-            ),
-          );
- 
+          if (BaseSignIn.of(context)?.formKey.currentState?.validate() ??
+              false) {
+            BlocProvider.of<AuthBloc>(context).add(
+              SigninEvent(
+                username: BaseSignIn.of(context)?.usernameController.text ?? '',
+                password: BaseSignIn.of(context)?.passwordController.text ?? '',
+              ),
+            );
           }
-       },
+        },
         child: Text('sign in'));
   }
 }

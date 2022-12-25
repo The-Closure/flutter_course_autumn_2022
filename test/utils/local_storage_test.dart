@@ -13,4 +13,9 @@ void main() {
       expect(await ls.read('TOKEN'), 'TOKEN_VALUE');
     },
   );
+  test('test removing token', () async {
+    SharedPreferences.setMockInitialValues({'TOKEN': 'token_value'});
+    await ls.delete('TOKEN');
+    expect(await ls.read('TOKEN'), null);
+  });
 }

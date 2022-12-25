@@ -6,6 +6,7 @@ import 'package:flutter_course_autumn_2022/services/auth_service.dart';
 import 'package:flutter_course_autumn_2022/services/brand_service.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/home_screen.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/signin_screen.dart';
+import 'package:flutter_course_autumn_2022/ui/screens/splash_screen.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -25,12 +26,26 @@ class MyApp extends StatelessWidget {
       ],
       // create: (context) => AuthBloc(AuthService(http.Client())),
       child: MaterialApp(
-        home: BaseSignIn(child: SignInScreen()),
         // home: HomeScreen(),
+        initialRoute: '/splash_screen',
+        theme: ThemeData()
+            .copyWith(iconTheme: IconThemeData(color: Colors.white, size: 24)),
         routes: {
+          '/splash_screen': (context) => SpalshScreen(),
+          '/signin_screen': (context) => BlocProvider(
+                create: (context) => AuthBloc(
+                  AuthService(
+                    http.Client(),
+                  ),
+                ),
+                child: BaseSignIn(child: SignInScreen()),
+              ),
           '/home_screen': (context) => BlocProvider(
-                create: (context) =>
-                    BrandBloc(BrandService(http.Client()))..add(FetchBrandsEvent()),
+                create: (context) => BrandBloc(
+                  BrandService(
+                    http.Client(),
+                  ),
+                )..add(FetchBrandsEvent()),
                 child: HomeScreen(),
               ),
         },

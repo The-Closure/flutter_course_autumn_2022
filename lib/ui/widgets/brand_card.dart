@@ -18,23 +18,33 @@ class BrandCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 3,
           height: MediaQuery.of(context).size.height / 4,
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Image.asset('assets/brandTest.png',
-                width: MediaQuery.of(context).size.width / 3,
-                height: 100,
-                fit: BoxFit.fill),
+            brand.image == null
+                ? Image.asset('assets/brandTest.png',
+                    width: MediaQuery.of(context).size.width / 3,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                        'assets/brandTest.png',
+                        width: MediaQuery.of(context).size.width / 3,
+                        height: 100,
+                        fit: BoxFit.fill),
+                    height: 100,
+                    fit: BoxFit.fill)
+                : Image.network(brand.image ?? '',
+                    width: MediaQuery.of(context).size.width / 3,
+                    height: 100,
+                    fit: BoxFit.fill),
             ListTile(
               title: Text(
-                 '',
+                brand.name ?? '',
                 style: TextStyle(fontSize: 8),
               ),
               subtitle: Text(
-                '',
+                brand.description ?? '',
                 style: TextStyle(fontSize: 8),
               ),
-              trailing: Text(
-                '',
-                style: TextStyle(fontSize: 8),
-              ),
+              // trailing: Text(
+              //   brand.phoneNumber ?? '',
+              //   style: TextStyle(fontSize: 8),
+              // ),
             )
           ]),
         ),
