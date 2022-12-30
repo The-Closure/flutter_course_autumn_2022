@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_course_autumn_2022/blocs/auth_bloc/auth_bloc.dart';
@@ -7,9 +8,26 @@ import 'package:flutter_course_autumn_2022/services/brand_service.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/home_screen.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/signin_screen.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/splash_screen.dart';
+import 'package:flutter_course_autumn_2022/utils/common_props.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+
   runApp(const MyApp());
 }
 
@@ -21,7 +39,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(AuthService(http.Client())),
+          create: (context) {
+            CommonProps().updateContext(context);
+            
+            return AuthBloc(AuthService(http.Client()));
+          },
         )
       ],
       // create: (context) => AuthBloc(AuthService(http.Client())),

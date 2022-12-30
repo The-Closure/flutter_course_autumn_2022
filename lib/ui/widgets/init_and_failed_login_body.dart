@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_course_autumn_2022/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_course_autumn_2022/ui/screens/signin_screen.dart';
 import 'package:flutter_course_autumn_2022/ui/widgets/signin_button.dart';
+import 'package:image_picker/image_picker.dart';
 
 class InitAndFailedLoginBody extends StatelessWidget {
   final String? message;
@@ -33,6 +34,13 @@ class InitAndFailedLoginBody extends StatelessWidget {
               },
             ),
             const SignInButton(),
+            IconButton(
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final file =
+                      await _picker.pickImage(source: ImageSource.gallery);
+                },
+                icon: Icon(Icons.image)),
             message != null
                 ? Text(
                     message!,

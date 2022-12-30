@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "788623020527",
+    "project_id": "flutter-course-summer-2022",
+    "storage_bucket": "flutter-course-summer-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788623020527:android:441d955f8b719e788ae61a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_course_autumn_2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788623020527-01b4onkvnjtpju6hovvjulr5oangdvrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtOVzkM4yBaYxT9lpzgGH-YiHfx7OnjFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788623020527-01b4onkvnjtpju6hovvjulr5oangdvrk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "788623020527-np27tgtmd0g2nl471ip9autbcf21sh36.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterCourseSummer2022"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788623020527:android:1fec81805664807e8ae61a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_course_summer_2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788623020527-01b4onkvnjtpju6hovvjulr5oangdvrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtOVzkM4yBaYxT9lpzgGH-YiHfx7OnjFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788623020527-01b4onkvnjtpju6hovvjulr5oangdvrk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "788623020527-np27tgtmd0g2nl471ip9autbcf21sh36.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterCourseSummer2022"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
