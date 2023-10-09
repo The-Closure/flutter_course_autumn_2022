@@ -1,5 +1,4 @@
 
-import 'package:dart_presudral/dart_presudral.dart';
 
 void main() {
 //   int age = 28;
