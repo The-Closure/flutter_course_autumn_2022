@@ -1,65 +1,77 @@
-
-
 void main() {
-//   int age = 28;
+  // int age = 20;
+  // double average;
 
-//   print(age);
+  // // print(average);
+  // String name;
+  // bool logicOperation;
 
-//   double avr = 2;
+  // print(age);
 
-//   print(avr);
+  // var counter = 30;
 
-//   num counter = 30.6;
+  // // counter = "hello";
 
-//   var price = 30;
+  // dynamic book = 'The Gang of four';
 
-// //  price = 30.5;
+  // book = 20;
 
-//   dynamic birthdate = '31/10/1999';
+  // num numberOfBooks = 30.6;
 
-//   birthdate = 30;
+  // print(book.runtimeType);
 
-//   birthdate = 30.7;
+  // // const int userId;
 
-//   const String name = "Abdalaziz";
+  // // userId = 5;
 
-//   print(name);
+  // final String nickName;
 
-//   final String nickname;
+  // // ? this is a null type in this point
+  // // print(nickName);
+  // nickName = "Alhaj";
 
-//   List studentsname = [12, 40, "anything"];
+  // print(nickName);
 
-//   print(studentsname[2]);
+  // List<int> ages = [13,20,22,55];
+  // print(ages[2]);
 
-//   Map<String, int> marks = {"Kinan": 90, "Omar": 91, "Abdalaziz": 40};
+  Map<dynamic, dynamic> majdMarks = {1: 90, 2: 80, 3: 98, "name": "ahmad"};
 
-//   print(marks.keys.elementAt(2));
-//   print(marks.values.elementAt(1));
+  print(majdMarks[1]);
+  print(majdMarks['name']);
 
-  Map<String, List<Map>> nestedMapWithList = {
-    "student": [
-      {"Ahmad": 70, "Yaser": 90, "Noor": 100}
-    ],
-    "teacher": [
-      {"Nader": 70, "Fadi": 90, "MHD": 100}
-    ]
+  Map<String, List<int>> nestedMap = {
+    "majd mark": [90, 80, 98, 59 + 1],
+    "abdalaziz mark": [60, 60, 60, 100]
   };
 
-  // print(nestedMapWithList.values.elementAt(0)[0].keys.elementAt(1));
+  print(nestedMap['abdalaziz mark']![3]);
 
-  // print(nestedMapWithList.values.elementAt(1)[0].values.elementAt(2));
+  print(nestedMap.keys.elementAt(0));
 
+  List<Map<String, Map<String, int>>> crazyNestedMap = [
+    {
+      "hamed": {"math 1": 57},
+      "ahmad": {"math 2": 0},
+      "abd": {"math 3": 90},
+      "majd": {"math 4": 100}
+    }
+  ];
 
-  // print(nestedMapWithList['student']![0].keys.elementAt(1));
-  
+print(addTwoNumber(50,firstNumber: 20,secondNumber: 100));
 
-  print(addTwoNumber(10,secondNumber: 30));
-
+int x = 40;
+int y = 50;
+ print(swapTwoNumber(x,y)) ;
+// print(y); 
 }
 
+addTwoNumber(int thirdNumber,{int firstNumber=0,required int secondNumber}){
+return firstNumber+secondNumber+thirdNumber;
+}
 
-int addTwoNumber(int editionNumber,{int firstNumber = 0,required int secondNumber}){
+(int ,int)swapTwoNumber(int firstNumber,int secondNumber){
 
-return firstNumber+secondNumber+editionNumber;
+return (secondNumber,firstNumber);
 
 }
