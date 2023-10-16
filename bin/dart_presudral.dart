@@ -1,90 +1,66 @@
 
-void main() {
+ import 'package:dio/dio.dart';
 
-  // TODO :
+main() async{
 
-  //? named contructer 
-  //? factory (deign patter) //  https://refactoring.guru/design-patterns
-  //? dio in dart http://pub.dev & http://dart.dev
-  
+  int result = addTwoNumber(4,()=>testFuntion());
+  print(result);
 
-  // int x =60;
-  // int y = 80;
-// print(swapTwoNumber(50, 90));
-// print(y);
+Stream counter =  getPacket();
 
+counter.listen((event) {
+  if(event % 2 == 0){
 
-// cat1.jump(10);
-
-// print(cat1.y);
-
-Animal cat = Cat(id: 1, name: "name", color: "color", y: 5, birthDate: 2);
-// cat.id = 3;
-cat.jump(20);
-print(cat.id);
-
-print(cat.runtimeType);
-
-
-
-print(cat.name);
-
- // ! Bad foraml 
-// Cat cat3 = Animal(name: name, color: color, y: y);
-
+  print('even');
+  }
+  else {
+    print('odd');
+  }
+});
 }
 
-class Animal extends Creature {
-  String name;
-  String color;
-  int y;
+Function addTwoNumber = (int fisrtNumber,Function multiply){
+return fisrtNumber+multiply();
+};
+
+testFuntion(){
+  return 10;
+}
 
 
-  Animal({
-    required super.id,
-    required this.name,
-    required this.color,
-    required this.y
-  });
+
+    // ? example to Restfull API
+  // await getDate();
+
+  //? compare between 2 async funtion
 
 
-  
+// int age = getDate();
+    // dynamic name =  getDate();
+    
+    // print( name);
+    //  name =  fetchData();
+    //  print( name);
 
-  jump(int height){
-    this.y = this.y + height; 
+
+Stream getPacket()async*{
+  for (int i = 0; i < 20; i++) {
+  await Future.delayed(Duration(seconds: 2));
+    yield i;
   }
 }
 
-class Cat extends Animal {
-int birthDate;
-  Cat({required super.id,required super.name, required super.color, required super.y,required this.birthDate});
 
+ getDate()async{
+Dio dio = Dio();
 
+dynamic data =  await dio.get('http://jsonplaceholder.typicode.com/comments/1',);
 
-@override
-jump(int height) {
-    y= y-height;
-  }
+print(data.data['name']);
 
 }
 
-
-abstract class Creature {
-   int id;
-  Creature({
-    required this.id,
-  });
-
-  showId(){
-
-  }
-  
-  
-}
-
-
-// (int , int) swapTwoNumber(int firstNumber ,int secondNumber){
- 
-//   return (secondNumber ,firstNumber);
-
+// fetchData()async{
+//    Future.delayed(Duration(seconds: 5));
+//   return 'Tareq';
 // }
