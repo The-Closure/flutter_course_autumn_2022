@@ -1,49 +1,35 @@
 
-import 'package:dio/dio.dart';
+main() {
+  Animal cat = Animal(name: 'katy', color: 'white',position: Position(x: 2, y: 2));
+  print(cat.position.y);
+  // cat.jump(20);
+  print(cat.position.y);
 
-main() async{
-// Car omarCar  = Car.Mercedice('benze');
-// print(omarCar.abS);
-dynamic data =await  getData();
+  Animal cat1 =Animal(name: 'katy', color: 'white', position: Position(x: 2, y: 2));
 
-print(data['name']);
-
-}
-
-getData()async{
-  Dio dio = Dio();
-
-   Response result =await dio.get('https://jsonplaceholder.typicode.com/comments/-1');
-  if(result.statusCode == 200){
-
-   return result.data;
+  if(cat==cat1){
+    print('Match');
   }
   else {
-    return {'name':'Error'};
+    print('Not Match');
   }
 }
 
-
-
-class Car {
+class Animal {
   String name;
-  String model;
-  bool abS;
-  // String type;
-  Car({
-    required this.name,
-    required this.model,
-    required this.abS,
-  });
+  String color;
   
-  factory Car.Mercedice(String type){
-    if(type=='benze'){
-    return Car(name: type, model: '2010', abS: true);
+  Position position;
 
-    }
-    else {
-      return Car(name: type, model: '2006', abS: false);
-    }
+  Animal({required this.name, required this.color, required this.position});
+
+  jump(int height){
+   this.position.y = this.position.y + height;
   }
+}
 
+class Position {
+  int x;
+  int y;
+  Position({required this.x, required this.y});
 }
