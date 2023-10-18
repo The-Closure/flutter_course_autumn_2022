@@ -1,66 +1,49 @@
 
- import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 
 main() async{
+// Car omarCar  = Car.Mercedice('benze');
+// print(omarCar.abS);
+dynamic data =await  getData();
 
-  int result = addTwoNumber(4,()=>testFuntion());
-  print(result);
+print(data['name']);
 
-Stream counter =  getPacket();
+}
 
-counter.listen((event) {
-  if(event % 2 == 0){
+getData()async{
+  Dio dio = Dio();
 
-  print('even');
+   Response result =await dio.get('https://jsonplaceholder.typicode.com/comments/-1');
+  if(result.statusCode == 200){
+
+   return result.data;
   }
   else {
-    print('odd');
-  }
-});
-}
-
-Function addTwoNumber = (int fisrtNumber,Function multiply){
-return fisrtNumber+multiply();
-};
-
-testFuntion(){
-  return 10;
-}
-
-
-
-    // ? example to Restfull API
-  // await getDate();
-
-  //? compare between 2 async funtion
-
-
-// int age = getDate();
-    // dynamic name =  getDate();
-    
-    // print( name);
-    //  name =  fetchData();
-    //  print( name);
-
-
-Stream getPacket()async*{
-  for (int i = 0; i < 20; i++) {
-  await Future.delayed(Duration(seconds: 2));
-    yield i;
+    return {'name':'Error'};
   }
 }
 
 
- getDate()async{
-Dio dio = Dio();
 
-dynamic data =  await dio.get('http://jsonplaceholder.typicode.com/comments/1',);
+class Car {
+  String name;
+  String model;
+  bool abS;
+  // String type;
+  Car({
+    required this.name,
+    required this.model,
+    required this.abS,
+  });
+  
+  factory Car.Mercedice(String type){
+    if(type=='benze'){
+    return Car(name: type, model: '2010', abS: true);
 
-print(data.data['name']);
+    }
+    else {
+      return Car(name: type, model: '2006', abS: false);
+    }
+  }
 
 }
-
-// fetchData()async{
-//    Future.delayed(Duration(seconds: 5));
-//   return 'Tareq';
-// }
